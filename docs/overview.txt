@@ -1,0 +1,57 @@
+
+
+BACKSTORY:
+  The year is 20XX.
+
+  You are a lion that, for reasons unknown, has been shipped to the top floor of an executive office building in downtown Capitol City, USA. In your heart beats a longing for the African Savannah. Instead, you find yourself in a modern office building, fluorescent lights have replaced the warm sun above, and terrible team-building posters have taken the place of the dry trees that dot your normal landscape.
+
+  You are confused, hungry, and angry.
+
+  And now, you must escape.
+
+
+MECHANICS:
+
+  The game is a side scroller, played as the lion. The objective is to get through each level, which is a floor in the build. You navigate through each level, until you reach the main lobby.
+
+
+  Game Mechanics
+    Metrics
+      Office Damage:
+        Damage to office equipment is tracked as a score, displayed on the screen
+      Kills:
+        The lion can kill people, but it's entirely optional. There is no reward for kills, only affects ending.
+      Collectibles:
+        The lion can trash office equipment and fetch collectibles
+  
+
+  Lions attacks are
+    - swipe - knock over objects in the game
+    - bite
+    - claw
+
+  Cardinal Rules
+    - no blood
+    - realism is only used for humor
+    - the game is purposely absurd
+    - you can finish the game without attacking anyone. In this case, the game becomes almost an absurd walking simulator.
+
+
+
+  Game Mechanics
+
+
+
+
+
+  End Game
+
+    - Kill everyone:
+      The building crumbles down, you've emptied it's soul and the people in it.
+
+    - Doesn't kill anyone
+      Voted Employee of the Month
+
+  Prologue:
+
+    You marry unhappily to a woman that's high maintenance, thick makeup, and your cubs are all over the place. You spend your nights in a bar, thinking about
