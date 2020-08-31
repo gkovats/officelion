@@ -1,30 +1,24 @@
 extends Actor
 
-const MOVE_SPEED = 400.0
-const MOVE_ACCEL = 50.0
-const JUMP_SPEED = 1600.0
+const MOVE_SPEED = 300.0
+const MOVE_ACCEL = 100.0
+const JUMP_SPEED = 400.0
 const FRICTION = 0.2
 const AIR_FRICTION = 0.05
-
-# @TODO: Move direction elsewhere
-# @TODO: 
-export var stomp_impulse: = 500.0
-export var move_speed: = 1.0
-export var jump_speed: = 1.0
-export var friction: = 1.0
-export var facing: = -1
+const STOMP_IMPULSE = 400.0
 
 func _ready():
 	# inital speed
+	print(gravity)
 	pass
 
 func _on_EnemyDetector_area_entered(_area):
 	print("Boink!")
 	_velocity = calculate_stomp_velocty(_velocity)
+	print(_velocity.y)
 
 func _on_EnemyDetector_body_entered(_body):
 	print("Ouch")
-	queue_free()
 	pass # Replace with function body.
 
 func _physics_process(_delta: float) -> void:
@@ -55,7 +49,7 @@ func calculate_move_velocty(_delta: float) -> Vector2:
 	var player = get_node("AnimationPlayer")
 	var on_floor = is_on_floor()
 	if direction.x:
-		facing = -1 if direction.x < 0 else 1
+		facing = -1.0 if direction.x < 0 else 1.0
 		new_velocity.x += direction.x * MOVE_ACCEL
 		if abs( new_velocity.x ) > speed.x:
 			new_velocity.x = direction.x * speed.x
@@ -75,6 +69,7 @@ func calculate_move_velocty(_delta: float) -> Vector2:
 	
 	if direction.y == -1.0:
 		new_velocity.y = speed.y * direction.y
+		print(new_velocity.y)
 
 	# animation
 	if on_floor:
@@ -105,6 +100,6 @@ func calculate_move_velocty(_delta: float) -> Vector2:
 
 func calculate_stomp_velocty(velocity: Vector2) -> Vector2:
 	var out: = velocity
-	out.y = -stomp_impulse
+	out.y = -STOMP_IMPULSE
 	return out
 
