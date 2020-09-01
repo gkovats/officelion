@@ -242,5 +242,3 @@ centered = false
 flip_h = true
 hframes = 10
 frame = 5
-[connection signal="area_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_area_entered"]
-[connection signal="body_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_body_entered"]

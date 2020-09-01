@@ -1,7 +1,7 @@
 extends Actor
 
-const MOVE_SPEED = 300.0
-const MOVE_ACCEL = 100.0
+const MOVE_SPEED = 200.0
+const MOVE_ACCEL = 50.0
 const JUMP_SPEED = 400.0
 const FRICTION = 0.2
 const AIR_FRICTION = 0.05
@@ -9,24 +9,17 @@ const STOMP_IMPULSE = 400.0
 
 func _ready():
 	# inital speed
-	print(gravity)
+	_speed = Vector2(MOVE_SPEED, JUMP_SPEED)
+	_player = get_node("AnimationPlayer")
 	pass
-
-func _on_EnemyDetector_area_entered(_area):
-	print("Boink!")
-	_velocity = calculate_stomp_velocty(_velocity)
-	print(_velocity.y)
 
 func _on_EnemyDetector_body_entered(_body):
 	print("Ouch")
-	pass # Replace with function body.
+	pass
 
 func _physics_process(_delta: float) -> void:
-	_velocity = calculate_move_velocty(_delta)
+	update_velocity(_delta)
 	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
-
-func get_speed() -> Vector2:
-	return Vector2( move_speed * MOVE_SPEED, jump_speed * JUMP_SPEED )
 
 func get_direction() -> Vector2:
 	return Vector2(
@@ -34,7 +27,7 @@ func get_direction() -> Vector2:
 		-1.0 if Input.get_action_strength("jump") and is_on_floor() else 0.0
 	)
 
-func calculate_move_velocty(_delta: float) -> Vector2:
+func update_velocity(_delta: float):
 	var direction: = get_direction()
 	# check inputs
 	
@@ -43,60 +36,53 @@ func calculate_move_velocty(_delta: float) -> Vector2:
 	#elif right:
 		# right animation
 	
-	var new_velocity: = _velocity
-	var speed = get_speed();
+	_speed = Vector2( _move_speed * MOVE_SPEED, _jump_speed * JUMP_SPEED )
 	var cur_friction = 0;
-	var player = get_node("AnimationPlayer")
 	var on_floor = is_on_floor()
 	if direction.x:
-		facing = -1.0 if direction.x < 0 else 1.0
-		new_velocity.x += direction.x * MOVE_ACCEL
-		if abs( new_velocity.x ) > speed.x:
-			new_velocity.x = direction.x * speed.x
+		_facing = FACING_LEFT if direction.x < 0 else FACING_RIGHT
+		_velocity.x += direction.x * MOVE_ACCEL
+		if abs( _velocity.x ) > _speed.x:
+			_velocity.x = _facing * _speed.x
 	
 	# else if still moving left / right figure friction
-	elif new_velocity.x:
+	elif _velocity.x:
 		if on_floor:
-			player.play("idle")
+			_player.play("idle")
 			cur_friction = friction * FRICTION
 
 		else:
 			cur_friction = friction * AIR_FRICTION
-		new_velocity.x = lerp(new_velocity.x, 0, cur_friction)
+		_velocity.x = lerp(_velocity.x, 0, cur_friction)
 			
 	# factor gravity
-	new_velocity.y += gravity * _delta
+	_velocity.y += gravity * _delta
 	
 	if direction.y == -1.0:
-		new_velocity.y = speed.y * direction.y
-		print(new_velocity.y)
+		_velocity.y = _speed.y * direction.y
 
 	# animation
 	if on_floor:
 		if direction.x:
-			if facing < 0:
-				player.play("walk_left")
+			if _facing == FACING_LEFT:
+				_player.play("walk_left")
 			else:
-				player.play("walk_right")
+				_player.play("walk_right")
 		else:
-			player.play("idle")
+			_player.play("idle")
 	else:
-		if new_velocity.y < 0:
-			if facing < 0:
-				player.play("jump_up_left")
+		if _velocity.y < 0:
+			if _facing == FACING_LEFT:
+				_player.play("jump_up_left")
 			else:
-				player.play("jump_up_right")
+				_player.play("jump_up_right")
 		else:
-			if facing < 0:
-				player.play("jump_down_left")
+			if _facing == FACING_LEFT:
+				_player.play("jump_down_left")
 			else:
-				player.play("jump_down_right")
+				_player.play("jump_down_right")
 
-	
-	#if Input.is_action_just_released("jump") and new_velocity.y < 0.0:
-	#	new_velocity.y = 0.0
-	
-	return new_velocity
+	pass
 
 func calculate_stomp_velocty(velocity: Vector2) -> Vector2:
 	var out: = velocity

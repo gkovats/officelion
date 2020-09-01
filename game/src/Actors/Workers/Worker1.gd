@@ -1,48 +1,42 @@
-extends "res://src/Actors/Actor.gd"
+extends "res://src/Actors/NPC.gd"
+
+class_name Worker1
 
 const MOVE_SPEED = 80.0
-const MOVE_ACCEL = 50.0
-const JUMP_SPEED = 400.0
-const FRICTION = 0.2
-const AIR_FRICTION = 0.05
-
-const ALARM_CALM = 0
-const ALARM_SCARED = 0
-
-var alarm = 0
-var is_running = false;
 
 func _ready():
-	rng.randomize()
-	set_physics_process(false);
-	set_safe_margin(2)
-	speed = Vector2( move_speed * MOVE_SPEED, 0 )
-	var rand = rng.randf()
-	facing = 1.0 if rand >= 0.5 else -1.0
-	print('facing: ' , rand, ' : ', facing)
+	#set_physics_process(false);
+	# face random direction
+	_facing_rand()
+	_player = get_node("AnimationPlayer")
+	_speed = Vector2(MOVE_SPEED, 0)
 
 func _physics_process(delta):
-	_velocity.y += delta * gravity
 	if is_on_wall():
-		facing *= -1.0
-		is_running = true
-		move_speed = 2.0
-		speed = Vector2( move_speed * MOVE_SPEED, 0 )
-		print('bump' , _velocity.x, facing)
+		_facing *= -1.0
+		print('bump' , _velocity.x, _facing)
 
-	_velocity.x = facing * speed.x
+	# update velocity
+	_update_velocity(delta)
+	_velocity = move_and_slide(_velocity, FLOOR_NORMAL)
 
-	var player = get_node("AnimationPlayer")
-	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
-	#if ( )
-	if facing < 0.0:
-		if is_running:
-			player.play("run_left")
-		else:
-			player.play("walk_left")
-	else:
-		if is_running:
-			player.play("run_right")
-		else:
-			player.play("walk_right")
-	
+	var direction = 'left' if  _facing == FACING_LEFT else 'right'
+	match state:
+		STATE_IDLE:
+			_player.play("idle_" + direction)
+		STATE_WALKING:
+			_player.play("walk_" + direction)
+		STATE_FLEEING:
+			_player.play("run_" + direction)
+
+func _on_Area2D_body_entered(body):
+	print('Howdy!', name, ' - to - ', body.get_class())
+	if 'NPC' == body.get_class():
+		if body.state >= STATE_FLEEING:
+			_update_alarm(ALARM_SCARED)
+		
+	if 'Lion' == body.name:
+		print('SCARED!')
+		_facing = FACING_LEFT if position.x < body.position.x else FACING_RIGHT
+		_update_alarm(ALARM_SCARED)
+	pass # Replace with function body.
