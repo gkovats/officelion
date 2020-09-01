@@ -30,7 +30,7 @@ func _ready():
 
 func _update_velocity(delta: float):
 	_velocity.y += delta * gravity
-	_velocity.x = _move_speed * _speed.x * _facing
+	_velocity.x = _factors.move * _speed.x * _facing
 	pass
 	
 func _update_alarm(alarm: int):
@@ -79,12 +79,12 @@ func _change_state():
 func _check_state():
 	match state:
 		STATE_WALKING:
-			_move_speed = 1.0
-			print(name, ': Walking: ', _move_speed)
+			_factors.move = 1.0
+			print(name, ': Walking: ', _factors.move)
 		STATE_FLEEING:
-			_move_speed = 2.0
-			print(name, ': Fleeing: ', _move_speed)
+			_factors.move = 2.0
+			print(name, ': Fleeing: ', _factors.move)
 		_:
-			_move_speed = 0.0
-			print(name, ': Idle: ', _move_speed)
+			_factors.move = 0.0
+			print(name, ': Idle: ', _factors.move)
 	return

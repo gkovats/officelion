@@ -4,6 +4,8 @@ class_name Worker1
 
 const MOVE_SPEED = 80.0
 
+onready var speech = get_node("Speech")
+
 func _ready():
 	#set_physics_process(false);
 	# face random direction
@@ -29,14 +31,24 @@ func _physics_process(delta):
 		STATE_FLEEING:
 			_player.play("run_" + direction)
 
-func _on_Area2D_body_entered(body):
+# When the worker sees the lion
+func _on_awareness_entered(body):
 	print('Howdy!', name, ' - to - ', body.get_class())
 	if 'NPC' == body.get_class():
 		if body.state >= STATE_FLEEING:
+			speech.say('Why are we running?')
 			_update_alarm(ALARM_SCARED)
-		
-	if 'Lion' == body.name:
+	if 'Lion' == body.get_class():
+		speech.say('AYYYEEEEE!!')
 		print('SCARED!')
 		_facing = FACING_LEFT if position.x < body.position.x else FACING_RIGHT
 		_update_alarm(ALARM_SCARED)
-	pass # Replace with function body.
+	return
+
+# When something enters worker personal space
+func _on_personal_bubble_entered(body):
+	if 'Lion' == body.get_class():
+		print('SCARED!')
+		_facing = FACING_LEFT if position.x < body.position.x else FACING_RIGHT
+		_update_alarm(ALARM_SCARED)
+	return

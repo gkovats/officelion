@@ -7,9 +7,13 @@ const FRICTION = 0.2
 const AIR_FRICTION = 0.05
 const STOMP_IMPULSE = 400.0
 
+func _init():
+	_speed = Vector2(MOVE_SPEED, JUMP_SPEED)
+
+func get_class(): return "Lion"
+
 func _ready():
 	# inital speed
-	_speed = Vector2(MOVE_SPEED, JUMP_SPEED)
 	_player = get_node("AnimationPlayer")
 	pass
 
@@ -36,7 +40,7 @@ func update_velocity(_delta: float):
 	#elif right:
 		# right animation
 	
-	_speed = Vector2( _move_speed * MOVE_SPEED, _jump_speed * JUMP_SPEED )
+	_speed = Vector2( _factors.move * MOVE_SPEED, _factors.jump * JUMP_SPEED )
 	var cur_friction = 0;
 	var on_floor = is_on_floor()
 	if direction.x:
@@ -81,8 +85,7 @@ func update_velocity(_delta: float):
 				_player.play("jump_down_left")
 			else:
 				_player.play("jump_down_right")
-
-	pass
+	return
 
 func calculate_stomp_velocty(velocity: Vector2) -> Vector2:
 	var out: = velocity

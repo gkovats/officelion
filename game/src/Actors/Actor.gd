@@ -8,10 +8,12 @@ const FLOOR_NORMAL = Vector2.UP
 const FACING_LEFT  = -1.0
 const FACING_RIGHT = 1.0
 
-# Speed
+# Factors
+var _factors: = {
+	"move": 1.0,
+	"jump": 1.0
+}
 var _speed: = Vector2.ZERO # speed factor
-var _move_speed: = 1.0 # speed factor
-var _jump_speed: = 1.0 # jump factor
 var _velocity: = Vector2.ZERO # current velocity
 
 # Animation Player
