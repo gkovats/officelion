@@ -6,9 +6,9 @@ The year is 20XX. The scenario: there's a lion in an office building. It's not n
 
 And now, it's time to clock out for the day and get back to something _more_ normal - maybe not "home", but not here.
 
-****
+***
 
-### Rules
+## Rules
 
 * Generally rated PG, or whatever the equivalent is in Games. Pegi 9? I dunno. In Europe they have those prerolls with the deep voiced British guy that says "PEGI" something. So, that.
 * No blood
@@ -17,18 +17,31 @@ And now, it's time to clock out for the day and get back to something _more_ nor
 * The game is purposely absurd
 * You can finish the game without attacking anyone. In this case, the game becomes almost an absurd walking simulator.
 
-### Mechanics
+## Mechanics
 
 * Track office damage, points for destruction of the most offensive office elements, like water features and standing desks
 * Dialogue trees, only every option the Lion has is a growl or a roar, or maybe a confused "errr?"
 
-### End Game Goals
+## End Game Goals
 
 * **Knock out everyone:**
   The building crumbles down, you've emptied it's soul and the people in it.
 * **Don't knock out anyone**
   Voted Employee of the Month. You get a placard and everything, and get featured in corporate newsletter.
 
-### One level removed
+***
+
+## One level removed
 
 This is entirely a lark to learn Godot and the process of creating a game. I'm totally comfortable working a graphics editor, getting the hang of pixel art, and I can code just dandy. Now it's a long process of navigating a game framework like Godot.
+
+## Tools
+
+* **[Aseprite](https://www.aseprite.org/)**
+  Sprite editor. Holy crap, how did anyone create pixel art before this app? Just amazing.
+* **[Godot](https://godotengine.org/)**
+  Game engine. Open Source, and really leans into codeability. Gets a lot of great reviews.
+* **[Krita](https://krita.org/en/)**
+  Image editor. Again, I'm cheap, so "open source PhotoShop". I've used GIMP before, but it's just not nearly as easy a transition from PhotoShop as Krita.
+* **[Visual Studio Code](https://code.visualstudio.com/)**
+  All hail the reigning king of free IDEs. It was fun while it lasted, Aptana.
