@@ -6,12 +6,23 @@ const MOVE_SPEED = 80.0
 
 onready var speech = get_node("Speech")
 
+onready var config = preload("res://src/Actors/Workers/WorkerConfig.gd")
+
 func _ready():
 	#set_physics_process(false);
 	# face random direction
 	_facing_rand()
 	_player = get_node("AnimationPlayer")
 	_speed = Vector2(MOVE_SPEED, 0)
+	var textures = config.get_textures()
+	$hair.texture = textures[config.HAIR]
+	$head.texture = textures[config.HEAD]
+	$arm_b.texture = textures[config.ARM_B]
+	$arm_f.texture = textures[config.ARM_F]
+	$face.texture = textures[config.FACE]
+	$bottom.texture = textures[config.BOTTOM]
+	$top.texture = textures[config.TOP]
+	pass
 
 func _physics_process(delta):
 	if is_on_wall():
@@ -35,11 +46,13 @@ func _physics_process(delta):
 func _on_awareness_entered(body):
 	print('Howdy!', name, ' - to - ', body.get_class())
 	if 'NPC' == body.get_class():
+		return
 		if body.state >= STATE_FLEEING:
 			speech.say('Why are we running?')
 			_update_alarm(ALARM_SCARED)
 	if 'Lion' == body.get_class():
-		speech.say('AYYYEEEEE!!')
+		speech.say('A lion?')
+		return
 		print('SCARED!')
 		_facing = FACING_LEFT if position.x < body.position.x else FACING_RIGHT
 		_update_alarm(ALARM_SCARED)
