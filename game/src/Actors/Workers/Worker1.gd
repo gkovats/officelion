@@ -22,6 +22,15 @@ func _ready():
 	$face.texture = textures[config.FACE]
 	$bottom.texture = textures[config.BOTTOM]
 	$top.texture = textures[config.TOP]
+	$top.modulate = Color(rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0))
+	$bottom.modulate = Color(rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0))
+	# $head.modulate = Color(0.8, 0.65, 0.35)
+	
+	# var mod = Color(0.3, 0.18, 0.15)
+	# $head.modulate = mod
+	# $arm_b.modulate = mod
+	# $arm_f.modulate = mod
+	# $hair.modulate = mod
 	pass
 
 func _physics_process(delta):

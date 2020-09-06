@@ -13,7 +13,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 34 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "idle_left"
 length = 2.6
 tracks/0/type = "value"
@@ -380,7 +380,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=4]
 resource_name = "run_left"
 length = 1.2
 tracks/0/type = "value"
@@ -564,7 +564,7 @@ tracks/14/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=5]
 resource_name = "run_right"
 length = 1.2
 tracks/0/type = "value"
@@ -748,7 +748,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=6]
 resource_name = "walk_left"
 length = 1.2
 tracks/0/type = "value"
@@ -932,7 +932,7 @@ tracks/14/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=7]
 resource_name = "walk_right"
 length = 1.2
 tracks/0/type = "value"
@@ -1183,12 +1183,12 @@ frame = 13
 [node name="Node" type="Node" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle_left = SubResource( 10 )
+anims/idle_left = SubResource( 2 )
 anims/idle_right = SubResource( 3 )
-anims/run_left = SubResource( 11 )
-anims/run_right = SubResource( 12 )
-anims/walk_left = SubResource( 13 )
-anims/walk_right = SubResource( 14 )
+anims/run_left = SubResource( 4 )
+anims/run_right = SubResource( 5 )
+anims/walk_left = SubResource( 6 )
+anims/walk_right = SubResource( 7 )
 
 [node name="Awareness" type="Area2D" parent="."]
 collision_mask = 2147483651
