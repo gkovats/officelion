@@ -20,14 +20,14 @@ _global_script_classes=[ {
 "path": "res://src/Actors/NPC.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Worker1",
+"class": "Worker",
 "language": "GDScript",
-"path": "res://src/Actors/Workers/Worker1.gd"
+"path": "res://src/Actors/Workers/Worker.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "NPC": "",
-"Worker1": ""
+"Worker": ""
 }
 
 [application]

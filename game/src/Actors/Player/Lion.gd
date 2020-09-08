@@ -14,7 +14,6 @@ func get_class(): return "Lion"
 
 func _ready():
 	# inital speed
-	_player = get_node("AnimationPlayer")
 	pass
 
 func _on_EnemyDetector_body_entered(_body):
@@ -40,19 +39,19 @@ func update_velocity(_delta: float):
 	#elif right:
 		# right animation
 	
-	_speed = Vector2( _factors.move * MOVE_SPEED, _factors.jump * JUMP_SPEED )
+	_speed = Vector2(factors.move * MOVE_SPEED, factors.jump * JUMP_SPEED)
 	var cur_friction = 0;
 	var on_floor = is_on_floor()
 	if direction.x:
-		_facing = FACING_LEFT if direction.x < 0 else FACING_RIGHT
+		facing = FACING_LEFT if direction.x < 0 else FACING_RIGHT
 		_velocity.x += direction.x * MOVE_ACCEL
 		if abs( _velocity.x ) > _speed.x:
-			_velocity.x = _facing * _speed.x
+			_velocity.x = facing * _speed.x
 	
 	# else if still moving left / right figure friction
 	elif _velocity.x:
 		if on_floor:
-			_player.play("idle")
+			$player.play("idle")
 			cur_friction = friction * FRICTION
 
 		else:
@@ -68,23 +67,23 @@ func update_velocity(_delta: float):
 	# animation
 	if on_floor:
 		if direction.x:
-			if _facing == FACING_LEFT:
-				_player.play("walk_left")
+			if facing == FACING_LEFT:
+				$player.play("walk_left")
 			else:
-				_player.play("walk_right")
+				$player.play("walk_right")
 		else:
-			_player.play("idle")
+			$player.play("idle")
 	else:
 		if _velocity.y < 0:
-			if _facing == FACING_LEFT:
-				_player.play("jump_up_left")
+			if facing == FACING_LEFT:
+				$player.play("jump_up_left")
 			else:
-				_player.play("jump_up_right")
+				$player.play("jump_up_right")
 		else:
-			if _facing == FACING_LEFT:
-				_player.play("jump_down_left")
+			if facing == FACING_LEFT:
+				$player.play("jump_down_left")
 			else:
-				_player.play("jump_down_right")
+				$player.play("jump_down_right")
 	return
 
 func calculate_stomp_velocty(velocity: Vector2) -> Vector2:

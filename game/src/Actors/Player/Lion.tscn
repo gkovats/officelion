@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Actors/Player/Lion.gd" type="Script" id=1]
 [ext_resource path="res://assets/actors/lion.png" type="Texture" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 37, 15 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -193,19 +190,7 @@ extents = Vector2( 34, 18 )
 collision_mask = 10
 script = ExtResource( 1 )
 
-[node name="EnemyDetector" type="Area2D" parent="."]
-visible = false
-modulate = Color( 0.568627, 0.0313726, 0.486275, 1 )
-position = Vector2( 0, -10 )
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
-modulate = Color( 0.415686, 0.0392157, 0.0392157, 1 )
-position = Vector2( 0, -19 )
-shape = SubResource( 1 )
-one_way_collision = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="player" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/idle = SubResource( 2 )
 anims/jump_down_left = SubResource( 3 )
@@ -220,8 +205,7 @@ position = Vector2( 0, -18 )
 shape = SubResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2( -1.18866, -69.3978 )
+position = Vector2( 0, -61 )
 scale = Vector2( 2, 2 )
 current = true
 limit_smoothed = true
@@ -239,6 +223,4 @@ editor_draw_drag_margin = true
 position = Vector2( -54, -72 )
 texture = ExtResource( 2 )
 centered = false
-flip_h = true
 hframes = 10
-frame = 5
