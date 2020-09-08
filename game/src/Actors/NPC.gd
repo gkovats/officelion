@@ -20,6 +20,7 @@ const ACTIVITIES = {
 	"mozy" : [ 
 		ACTIONS.idle,
 		ACTIONS.face_random,
+		ACTIONS.idle,
 		ACTIONS.walking,
 	],
 	"shoved" : [
@@ -113,7 +114,7 @@ func _do_action(new_action: int, clear_queue: bool = false) -> void:
 			wait = rng.randf_range(1.0, 2.0)
 		ACTIONS.face_random:
 			_facing_rand()
-			wait = rng.randf_range(1.0, 2.0)
+			wait = 0.0
 		ACTIONS.shoved:
 			wait = rng.randf_range(0.5, 2.0)
 			factors.slowstop = 0.1
@@ -125,8 +126,11 @@ func _do_action(new_action: int, clear_queue: bool = false) -> void:
 			factors.move = 0.0
 			print(name, ': Idle: ', factors.move)
 			
-	_action_timer.start(wait)
 	_do_animation()
+	if wait > 0.0:
+		_action_timer.start(wait)
+	else:
+		_next_action()
 	return
 
 # overridden by the child to handle animation

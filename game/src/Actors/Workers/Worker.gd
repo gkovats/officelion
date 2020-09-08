@@ -4,7 +4,7 @@ class_name Worker
 
 const MOVE_SPEED = 80.0
 
-onready var config = preload("res://src/Actors/Workers/WorkerConfig.gd")
+onready var worker_config = preload("res://src/Actors/Workers/WorkerConfig.gd")
 
 func _init():
 	_set_activity(ACTIVITIES.mozy)
@@ -14,14 +14,7 @@ func _ready():
 	# face random direction
 	_facing_rand()
 	_speed = Vector2(MOVE_SPEED, 0)
-	var textures = config.get_textures()
-	$hair.texture = textures[config.HAIR]
-	$head.texture = textures[config.HEAD]
-	$arm_b.texture = textures[config.ARM_B]
-	$arm_f.texture = textures[config.ARM_F]
-	$face.texture = textures[config.FACE]
-	$bottom.texture = textures[config.BOTTOM]
-	$top.texture = textures[config.TOP]
+	worker_config.config(self)
 	$top.modulate = Color(rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0))
 	$bottom.modulate = Color(rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0), rng.randf_range(0.8, 1.0))
 
@@ -65,9 +58,9 @@ func _on_awareness_entered(body):
 			_update_alarm(ALARM_SCARED)
 	if 'Lion' == body.get_class():
 		$speech.say('A lion?')
-		return
 		print('SCARED!')
 		facing = FACING_LEFT if position.x < body.position.x else FACING_RIGHT
+		_do_action(ACTIONS.running, true)
 		_update_alarm(ALARM_SCARED)
 	return
 
